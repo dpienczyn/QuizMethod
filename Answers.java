@@ -1,5 +1,8 @@
 package Quiz;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Answers {
 
 	public String answer1;
