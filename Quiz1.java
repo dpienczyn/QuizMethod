@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Quiz1{
 	
-	public void Start() {
+	public void start() {
 		System.out.println("**********Quiz Przyrodniczy**********");
 		System.out.println("Na ekranie bed¹ wyœwietlaæ siê pytania na które trzeba odpowiadaæ: a, b, c lub d.");
 		System.out.println("Odpowiedz jest tylko jedna!");
@@ -14,7 +14,7 @@ public class Quiz1{
 		System.out.println();
 	}
 
-	public String MyAnswer() {
+	public String userAnswer() {
 		Scanner in = new Scanner(System.in);
 		String r;
 		r = in.nextLine();
@@ -24,9 +24,9 @@ public class Quiz1{
 	int score = 0;
 	int i=0;
 	
-	public int AddScore( String r, List<RightAnswers> p) {
+	public int addScore( String userAnswer, List<RightAnswers> rightAnswers) {
 		
-		if(r.equals(p.get(i).getEquivalent())) {
+		if(userAnswer.equals(rightAnswers.get(i).getEquivalent())) {
 			System.out.println("Odpowiedz jest prawid³owa! Brawo!");
 			score++;
 		}else {
@@ -37,7 +37,7 @@ public class Quiz1{
 		return score;
 	}
 	
-	public void Score(int score) {
+	public void score(int score) {
 		char newLine = '\n';
 		System.out.println(newLine + "Twoja liczba punktów: " + score);
 		System.out.println();
@@ -47,19 +47,19 @@ public class Quiz1{
 	public static void main(String[] args) {
 		Quiz1 quiz = new Quiz1();
 		DataAllList data = new DataAllList();
-		quiz.Start();
+		quiz.start();
 		List<Questions> questions = data.DownloadQuestion();
-		List<Answers> answer = data.DownloadAnswer();
-		List<RightAnswers> rightAnswer = data.DownloadRightAnswer();
-		String myAnswer;
+		List<Answers> answers = data.DownloadAnswer();
+		List<RightAnswers> rightAnswers = data.DownloadRightAnswer();
+		String userAnswer;
 		int score;
 		char newLine = '\n';
 		for(int i=0; i<questions.size(); i++) {
 			System.out.println(questions.get(i).getQuestion());
-			System.out.println(newLine + answer.get(i).getAnswer1() + newLine +answer.get(i).getAnswer2() + newLine + answer.get(i).getAnswer3() + newLine + answer.get(i).getAnswer4());
-			myAnswer = quiz.MyAnswer();
-			score = quiz.AddScore(myAnswer, rightAnswer);
-			quiz.Score(score);
+			System.out.println(newLine + answers.get(i).getAnswer1() + newLine +answers.get(i).getAnswer2() + newLine + answers.get(i).getAnswer3() + newLine + answers.get(i).getAnswer4());
+			userAnswer = quiz.userAnswer();
+			score = quiz.addScore(userAnswer, rightAnswers);
+			quiz.score(score);
 		}
 	}
 
